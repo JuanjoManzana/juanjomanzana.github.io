@@ -6,102 +6,142 @@
   <title>ML TV Apps</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
   <style>
-    :root {
+    :root{
       --hero-height: 260px;
-      --bg1: #1a535c;
-      --bg2: #00c4cc;
-      --bg3: #4ecdc4;
+      --bg1:#1a535c;
+      --bg2:#00c4cc;
+      --bg3:#4ecdc4;
     }
-    body {
-      background: #f8f9fa;
-      color: #333;
+    body{
+      background:#f8f9fa;
+      color:#333;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    .hero-canvas-wrapper {
+    /* HEADER */
+    .hero-canvas-wrapper{
       position: relative;
       height: var(--hero-height);
       overflow: hidden;
       background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
       background-size: 300% 300%;
-      animation: gradientBG 15s ease infinite;
+      animation: gradientBG 18s ease infinite;
+      isolation: isolate; /* mejora la mezcla de las gotas */
+    }
+    @keyframes gradientBG{
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
     }
 
-    @keyframes gradientBG {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+    .hero-text{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      text-align:center;
+      color:#fff;
+      pointer-events:none;
+      z-index:1;
+    }
+    .hero-text h1{
+      font-size:3rem;
+      font-weight:900;
+      text-shadow:0 3px 6px rgba(0,0,0,.25);
+      margin-bottom:.4rem;
+      letter-spacing:-.5px;
+    }
+    .hero-text h2{
+      max-width:740px;
+      font-size:1.15rem;
+      font-weight:300;
+      opacity:.9;
+      line-height:1.3;
     }
 
-    .hero-fallback {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      color: #fff;
-      text-align: center;
-      z-index: 0;
-      pointer-events: none;
+    /* Gotas */
+    .droplet{
+      position:absolute;
+      width:220px;
+      height:180px;
+      border-radius:60% 40% 65% 35% / 60% 45% 55% 40%;
+      background:rgba(255,255,255,.08);
+      -webkit-backdrop-filter: blur(12px) saturate(160%);
+      backdrop-filter: blur(12px) saturate(160%);
+      box-shadow: 0 10px 24px rgba(0,0,0,.06);
+      mix-blend-mode: soft-light;
+      z-index:2;
+      pointer-events:none;
+      will-change: transform, border-radius;
     }
-    .hero-fallback h1 {
-      font-size: 3rem;
-      font-weight: 900;
-      text-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
-      margin-bottom: 0.5rem;
+    .droplet.small{
+      width:150px;
+      height:120px;
+      opacity:.6;
+      -webkit-backdrop-filter: blur(10px) saturate(160%);
+      backdrop-filter: blur(10px) saturate(160%);
     }
-    .hero-fallback h2 {
-      max-width: 700px;
-      font-size: 1.2rem;
-      font-weight: 300;
-      opacity: 0.9;
-      line-height: 1.3;
-    }
-
-    #heroCanvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      display: block;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .app-card img {
-      max-height: 200px;
-      object-fit: contain;
-      transition: transform 0.3s ease;
-    }
-    .app-card:hover img {
-      transform: scale(1.05);
-    }
-    .card {
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    }
-    .card-content {
-      text-align: center;
+    /* highlight especular dentro de la gota */
+    .droplet::after{
+      content:'';
+      position:absolute;
+      left:18%;
+      top:12%;
+      width:60%;
+      height:60%;
+      border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.45), rgba(255,255,255,0) 70%);
+      filter: blur(2px);
     }
 
-    .footer {
-      background: #f8f9fa;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
+    /* Cards */
+    .app-card img{
+      max-height:200px;
+      object-fit:contain;
+      transition:transform .3s ease;
+    }
+    .app-card:hover img{
+      transform:scale(1.05);
+    }
+    .card{
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    .card-content{
+      text-align:center;
+    }
+
+    .footer{
+      background:#f8f9fa;
+      padding:2rem 1rem;
+      font-size:.9rem;
+    }
+
+    /* Fallback si no hay soporte de backdrop-filter */
+    @supports not ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
+      .droplet{
+        background: rgba(255,255,255,.05);
+        box-shadow:none;
+        mix-blend-mode: normal;
+      }
     }
   </style>
 </head>
 <body>
 
   <!-- HEADER / HERO -->
-  <section class="hero-canvas-wrapper">
-    <div class="hero-fallback">
+  <section class="hero-canvas-wrapper" id="hero">
+    <div class="hero-text">
       <h1>ML TV Apps</h1>
       <h2>Las mejores apps de TV en vivo, deportes y entretenimiento. Todo en un solo lugar.</h2>
     </div>
-    <canvas id="heroCanvas"></canvas>
+
+    <!-- Gotas -->
+    <div class="droplet" id="drop1"></div>
+    <div class="droplet small" id="drop2"></div>
   </section>
 
   <!-- APPS SECTION -->
@@ -109,7 +149,6 @@
     <div class="container">
       <div class="columns is-multiline">
 
-        <!-- Apps (sin cambios) -->
         <!-- Malaysia -->
         <div class="column is-one-third">
           <div class="card app-card">
@@ -127,7 +166,107 @@
           </div>
         </div>
 
-        <!-- ... resto de apps ... -->
+        <!-- Russia -->
+        <div class="column is-one-third">
+          <div class="card app-card">
+            <div class="card-image">
+              <figure class="image">
+                <img src="https://play-lh.googleusercontent.com/bTJvnpysga5BN9Kd8J-h9-Fq0h4cHdr8WnK4FkGXB6Q7UanHsNX4zLeqgg5eqnxaGA=w240-h480-rw" alt="Russia TV Online App Icon">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-5">Russia TV Online</p>
+              <a href="https://play.google.com/store/apps/details?id=russia.tv.online.live.football.hockey.com" class="button is-link is-fullwidth" target="_blank" rel="noopener">
+                View on Play Store
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bangladesh -->
+        <div class="column is-one-third">
+          <div class="card app-card">
+            <div class="card-image">
+              <figure class="image">
+                <img src="https://play-lh.googleusercontent.com/ftFaG9obBUI50tvo-H_ureCJJmyvai3RkVcP3lFao4aTKYAIJ_dlaZ4r4mtxXUZ4Sw=w240-h480-rw" alt="Bangladesh TV Online App Icon">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-5">Bangladesh TV Online</p>
+              <a href="https://play.google.com/store/apps/details?id=bangladesh.tv.live.football.cricket.basketball" class="button is-link is-fullwidth" target="_blank" rel="noopener">
+                View on Play Store
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ukraine -->
+        <div class="column is-one-third">
+          <div class="card app-card">
+            <div class="card-image">
+              <figure class="image">
+                <img src="https://play-lh.googleusercontent.com/KrhJ65J_SNCOa1dJdyonEboNG36XhXdzhK3Y0quFXrnb81dbxNOwAr5JWzjcg-7j6A=w240-h480-rw" alt="Ukraine TV Online App Icon">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-5">Ukraine TV Online</p>
+              <a href="https://play.google.com/store/apps/details?id=ukraine.ukrayina.football.basketball.livetv.online" class="button is-link is-fullwidth" target="_blank" rel="noopener">
+                View on Play Store
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- España -->
+        <div class="column is-one-third">
+          <div class="card app-card">
+            <div class="card-image">
+              <figure class="image">
+                <img src="https://play-lh.googleusercontent.com/na2acdYEgOx-SZMNW3D6CRVbZY-xtm-PqKi32TLCNfPacxkMTK5-uHrSGivbP3A6zq4=w480-h960" alt="Spain TV Online App Icon">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-5">España TV Online</p>
+              <a href="https://play.google.com/store/apps/details?id=espana.spain.tv.online.live.en.directo.futbol.formula.uno.deportes" class="button is-link is-fullwidth" target="_blank" rel="noopener">
+                View on Play Store
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mongolia -->
+        <div class="column is-one-third">
+          <div class="card app-card">
+            <div class="card-image">
+              <figure class="image">
+                <img src="https://play-lh.googleusercontent.com/e1MChNAwAdeQDA19U_5d9omDT4cU2azbmNUzhV8-v6QZhrDOxCOeJN-Wih53aEw2fc00=w240-h480-rw" alt="Mongolia TV Online App Icon">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-5">Mongolia TV Online</p>
+              <a href="https://play.google.com/store/apps/details?id=mongolia.tv.mongol.uls.online.live.football.horses.bokh.naadam" class="button is-link is-fullwidth" target="_blank" rel="noopener">
+                View on Play Store
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Uruguay -->
+        <div class="column is-one-third">
+          <div class="card app-card">
+          <div class="card-image">
+            <figure class="image">
+              <img src="https://play-lh.googleusercontent.com/T3Equ6QYsXNp-jdpvlXidoeFwbsLwUU6BrMXDgxClW8hzk6cQDSBgCUsq1E0lxAlgOgZEFVWdvzQa03jlJHm=w480-h960" alt="Uruguay TV Online App Icon">
+            </figure>
+          </div>
+          <div class="card-content">
+            <p class="title is-5">Uruguay TV Online</p>
+            <a href="https://play.google.com/store/apps/details?id=uruguay.tv.online.vivo.futbol.basketbol.live" class="button is-link is-fullwidth" target="_blank" rel="noopener">
+              View on Play Store
+            </a>
+          </div>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -144,80 +283,36 @@
     </div>
   </footer>
 
-  <!-- PixiJS + efecto gota -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.5.8/browser/pixi.min.js"></script>
   <script>
-    (function() {
-      const el = document.getElementById('heroCanvas');
-      if (!PIXI.utils.isWebGLSupported() || !el) return;
+    // Animación de las gotas (trayectorias tipo Lissajous, suaves, por TODO el header)
+    const hero = document.getElementById('hero');
+    const drop1 = document.getElementById('drop1');
+    const drop2 = document.getElementById('drop2');
 
-      const app = new PIXI.Application({
-        view: el,
-        resizeTo: el.parentElement,
-        backgroundAlpha: 0,
-        antialias: true
-      });
+    let t = 0;
+    function loop(){
+      const w = hero.clientWidth;
+      const h = hero.clientHeight;
 
-      const title = new PIXI.Text('ML TV Apps', {
-        fontFamily: 'Segoe UI, sans-serif',
-        fontSize: 80,
-        fontWeight: 900,
-        fill: 0xFFFFFF,
-        dropShadow: true,
-        dropShadowColor: '#000000',
-        dropShadowBlur: 8,
-        dropShadowDistance: 0
-      });
+      // Primera gota (más grande)
+      const x1 = w/2 + Math.cos(t * 0.8) * (w * 0.35);
+      const y1 = h/2 + Math.sin(t * 1.3) * (h * 0.35);
+      const s1 = 1 + Math.sin(t * 1.7) * 0.06;
+      const r1a = 60 + Math.sin(t * 1.2) * 10;
+      const r1b = 40 + Math.cos(t * 1.4) * 10;
+      drop1.style.transform = `translate(${x1 - drop1.offsetWidth/2}px, ${y1 - drop1.offsetHeight/2}px) scale(${s1})`;
+      drop1.style.borderRadius = `${r1a}% ${100-r1a}% ${65+r1b/2}% ${35-r1b/2}% / ${60+r1b/3}% ${45-r1b/3}% ${55+r1b/4}% ${40-r1b/4}%`;
 
-      const subtitle = new PIXI.Text(
-        'Las mejores apps de TV en vivo, deportes y entretenimiento',
-        {
-          fontFamily: 'Segoe UI, sans-serif',
-          fontSize: 24,
-          fontWeight: 300,
-          fill: 0xFFFFFF
-        }
-      );
+      // Segunda gota (más pequeña y rápida)
+      const x2 = w/2 + Math.cos(t * 1.4 + 1.2) * (w * 0.28);
+      const y2 = h/2 + Math.sin(t * 1.9 + 0.6) * (h * 0.28);
+      const s2 = 1 + Math.sin(t * 2.2) * 0.05;
+      drop2.style.transform = `translate(${x2 - drop2.offsetWidth/2}px, ${y2 - drop2.offsetHeight/2}px) scale(${s2})`;
 
-      const container = new PIXI.Container();
-      container.addChild(title, subtitle);
-      app.stage.addChild(container);
-
-      function layout() {
-        title.x = (app.renderer.width - title.width) / 2;
-        title.y = app.renderer.height / 2 - 50;
-        subtitle.x = (app.renderer.width - subtitle.width) / 2;
-        subtitle.y = title.y + title.height + 5;
-      }
-      layout();
-      window.addEventListener('resize', layout);
-
-      // Crear displacement map
-      const dropGfx = new PIXI.Graphics();
-      const DROP_RADIUS = 150;
-      dropGfx.beginFill(0x8080ff);
-      dropGfx.drawCircle(DROP_RADIUS, DROP_RADIUS, DROP_RADIUS);
-      dropGfx.endFill();
-
-      const dropTex = app.renderer.generateTexture(dropGfx);
-      const dropSprite = new PIXI.Sprite(dropTex);
-      dropSprite.anchor.set(0.5);
-      const displacementFilter = new PIXI.filters.DisplacementFilter(dropSprite);
-      displacementFilter.scale.x = 60;
-      displacementFilter.scale.y = 60;
-
-      app.stage.addChild(dropSprite);
-      container.filters = [displacementFilter];
-
-      let t = 0;
-      app.ticker.add((delta) => {
-        t += 0.008 * delta;
-        const w = app.renderer.width;
-        const h = app.renderer.height;
-        dropSprite.x = w/2 + Math.cos(t) * (w * 0.2);
-        dropSprite.y = h/2 + Math.sin(t * 1.5) * (h * 0.2);
-      });
-    })();
+      t += 0.007;
+      requestAnimationFrame(loop);
+    }
+    loop();
   </script>
 </body>
 </html>
