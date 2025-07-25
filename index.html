@@ -6,27 +6,122 @@
   <title>ML TV Apps</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
   <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    /* --- HEADER --- */
+    .hero.is-primary {
+      background: linear-gradient(135deg, #00c4cc, #4ecdc4, #1a535c);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+      padding: 5rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .hero .title {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+      margin-bottom: 1rem;
+    }
+
+    .hero .subtitle {
+      font-size: 1.4rem;
+      color: #f1f1f1;
+      font-weight: 300;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .hero .cta-buttons a {
+      padding: 0.8rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+    .hero .cta-buttons a:hover {
+      transform: translateY(-3px);
+    }
+
+    .button-primary {
+      background-color: #ffffff;
+      color: #1a535c;
+      border: none;
+    }
+
+    .button-secondary {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      border: 2px solid #fff;
+    }
+
+    /* --- APP CARDS --- */
     .app-card img {
       max-height: 200px;
       object-fit: contain;
+      transition: transform 0.3s ease;
     }
-    .hero.is-primary {
-      background-color: #00d1b2;
+
+    .app-card:hover img {
+      transform: scale(1.05);
     }
+
+    .card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-content {
+      text-align: center;
+    }
+
+    .footer {
+      background-color: #f8f9fa;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+    }
+
   </style>
 </head>
 
 <body>
+  <!-- HEADER -->
   <section class="hero is-primary">
-    <div class="hero-body">
-      <div class="container has-text-centered">
-        <h1 class="title">ML TV Apps</h1>
-        <h2 class="subtitle">All your TV apps in one place</h2>
+    <div class="hero-body has-text-centered">
+      <h1 class="title">ML TV Apps</h1>
+      <h2 class="subtitle">
+        Disfruta de las mejores apps de TV en vivo, deportes y entretenimiento. Todo en un solo lugar.
+      </h2>
+      <div class="cta-buttons">
+        <a href="#apps" class="button button-primary">Explorar Apps</a>
+        <a href="https://play.google.com/store/apps/developer?id=ML+TV+APPS" target="_blank" class="button button-secondary">Google Play</a>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <!-- APPS SECTION -->
+  <section id="apps" class="section">
     <div class="container">
       <div class="columns is-multiline">
 
@@ -149,8 +244,8 @@
           </div>
         </div>
 
-      </div> <!-- .columns -->
-    </div> <!-- .container -->
+      </div>
+    </div>
   </section>
 
   <footer class="footer">
