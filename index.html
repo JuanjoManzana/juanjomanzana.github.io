@@ -31,29 +31,13 @@
     .brand-title{font-weight:800; letter-spacing:-.3px;}
     .brand-sub{font-size:.85rem; opacity:.7}
 
-    /* HERO (más sobrio y profesional) */
+    /* HERO (sobrio y profesional) */
     .hero-clean{
       position:relative;
       background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
-      /* patrón sutil */
-      background-image: linear-gradient(180deg, rgba(255,255,255,.02) 0%, rgba(255,255,255,0) 60%),
-                        repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0, rgba(255,255,255,.03) 1px, transparent 1px, transparent 24px),
-                        repeating-linear-gradient(0deg, rgba(0,0,0,.05) 0, rgba(0,0,0,.05) 1px, transparent 1px, transparent 24px),
-                        linear-gradient(180deg, var(--bg1), var(--bg2));
       color:#fff;
       padding: 56px 0 64px;
       border-bottom:1px solid rgba(255,255,255,.06);
-      overflow:hidden;
-    }
-    .hero-clean .title{ font-weight:900; letter-spacing:-.5px; }
-    .hero-clean .subtitle{ opacity:.9; max-width:780px }
-    .hero-clean{
-      position:relative;
-      background: radial-gradient(1200px 500px at 10% -20%, #1f2937 0%, rgba(31,41,55,0) 60%),
-                  radial-gradient(1200px 500px at 110% 0%, #0ea5e9 0%, rgba(14,165,233,0) 60%),
-                  linear-gradient(135deg, var(--bg1), var(--bg2));
-      color:#fff;
-      padding: 64px 0 72px;
       overflow:hidden;
     }
     .hero-clean .title{ font-weight:900; letter-spacing:-.5px; }
@@ -95,10 +79,16 @@
   <nav class="navbar is-ml" role="navigation" aria-label="main navigation">
     <div class="container">
       <div class="navbar-brand">
-        <a class=\"navbar-item\" href=\"#\">
-          <span class=\"brand-logo\" aria-hidden=\"true\">
-            <svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">
-              <path d=\"M4 12a8 8 0 1 1 16 0v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6z\" fill=\"#22c55e\" opacity=\"0.9\"\/><path d=\"M8 13.5h2.75L12 16l1.25-2.5H16l
+        <a class="navbar-item" href="#">
+          <span class="brand-logo" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 12a8 8 0 1 1 16 0v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6z" fill="#22c55e" opacity="0.9"/>
+              <path d="M8 13.5h2.75L12 16l1.25-2.5H16l-4-7-4 7z" fill="#fff"/>
+            </svg>
+          </span>
+          <span class="brand-title">ML TV Apps</span>&nbsp;
+          <span class="brand-sub">by ML</span>
+        </a>
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMain">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -111,6 +101,8 @@
           <a class="navbar-item" href="#android">Android</a>
           <a class="navbar-item" href="#ios">iOS</a>
           <a class="navbar-item" href="#apps">Todas</a>
+          <a class="navbar-item" href="https://play.google.com/store/apps/developer?id=ML+TV+APPS" target="_blank" rel="noopener">Perfil Google Play</a>
+          <a class="navbar-item" href="https://apps.apple.com/us/developer/santiago-martinez-antequera/id1688175834" target="_blank" rel="noopener">Perfil App Store</a>
         </div>
       </div>
     </div>
@@ -121,360 +113,10 @@
     <div class="container">
       <div class="columns is-vcentered">
         <div class="column is-7">
-          <h1 class="title is-1">Apps de TV y entretenimiento</h1>
-          <p class="subtitle is-5">TV en vivo, deportes y ocio. Catálogo curado para Android y iOS.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ANDROID SECTION -->
-  <section id="android" class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="title is-3">Android</h2>
-        <span class="hint">Publicadas en Google Play</span>
-      </div>
-      <div class="columns is-multiline">
-        
-        <!-- Malaysia -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/7whWswBybe9g-n3YLI2-aMU2UP5c12EpK0Gmb-Vdm_5xDNKkZknolAu0kwIdK1WvNSg=w240-h480-rw" alt="Malaysia TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">Malaysia TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=talian.sepak.takraw.pencak.silat.bola.televisyen.dalam" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Russia -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/bTJvnpysga5BN9Kd8J-h9-Fq0h4cHdr8WnK4FkGXB6Q7UanHsNX4zLeqgg5eqnxaGA=w240-h480-rw" alt="Russia TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">Russia TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=russia.tv.online.live.football.hockey.com" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bangladesh -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/ftFaG9obBUI50tvo-H_ureCJJmyvai3RkVcP3lFao4aTKYAIJ_dlaZ4r4mtxXUZ4Sw=w240-h480-rw" alt="Bangladesh TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">Bangladesh TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=bangladesh.tv.live.football.cricket.basketball" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Ukraine -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/KrhJ65J_SNCOa1dJdyonEboNG36XhXdzhK3Y0quFXrnb81dbxNOwAr5JWzjcg-7j6A=w240-h480-rw" alt="Ukraine TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">Ukraine TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=ukraine.ukrayina.football.basketball.livetv.online" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- España -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/na2acdYEgOx-SZMNW3D6CRVbZY-xtm-PqKi32TLCNfPacxkMTK5-uHrSGivbP3A6zq4=w480-h960" alt="Spain TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">Spain TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=espana.spain.tv.online.live.en.directo.futbol.formula.uno.deportes" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Mongolia -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/e1MChNAwAdeQDA19U_5d9omDT4cU2azbmNUzhV8-v6QZhrDOxCOeJN-Wih53aEw2fc00=w240-h480-rw" alt="Mongolia TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">Mongolia TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=mongolia.tv.mongol.uls.online.live.football.horses.bokh.naadam" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Uruguay -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/T3Equ6QYsXNp-jdpvlXidoeFwbsLwUU6BrMXDgxClW8hzk6cQDSBgCUsq1E0lxAlgOgZEFVWdvzQa03jlJHm=w480-h960" alt="Uruguay TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">Uruguay TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=uruguay.tv.online.vivo.futbol.basketbol.live" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Thailand -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/18bRvYe7FskOY0tG9XNw25wwzejVdnlznWcWw3QKosebMVKE05Ux7N6_JbDrSUdQ3vmcAo3tT-5N-9tgpso1Zg=w240-h480-rw" alt="Thailand TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">Thailand TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=thailand.tv.online.live.football.muay.thai" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- South Korea -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/KiCTUrXdfVft3QWAVX-GlouR97XtjqoUcmWZ7lz7AQIOZFrLz_qIG0TLA4mIkKQGbPnubknIEZ-c_rrhKgk=w240-h480-rw" alt="South Korea TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">South Korea TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=taekwondo.south.kore.tv.live.online.football.basketball" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Nigeria -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/4WhgNK8CU6Jiq3ZDYINMcO58l3fNO6b5Em19HsqYPIgu5Z9ZD_IxTYQIC4iRcLOVkOkQq8CPYjs8nK1sRiat=w240-h480-rw" alt="Nigeria TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">Nigeria TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=nigeria.tv.online.live.football.basketball" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Egypt -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/p7qqwDjvF3xkGEyMTT3oZynCGrooSFO4DAdORbDPZcum7vZhDy0PvsUz9hU5AeSATq4WNh5Biu4zxaSrvCd5=w240-h480-rw" alt="Egypt TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">Egypt TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=egypt.tv.online.football.basketball.series.films" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Ethiopia -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/lUqA-QKXLSDjZdN4R698Y6yGR4gmCLPyFbWBIp75P38Uc-MGK8VtW-C1fisXgFprllX6_3a0EKvIAcJE1iECAA=w480-h960" alt="Ethiopia TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">Ethiopia TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=ethiopia.tv.online.live.football.basketball" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Poland -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/gY-SPy5ewewyrcRvbQIImTnZ9WVdmUY8CdJ2Jr_l_zG2kaQsg9TsuGOiAJU4g-TRJAAZPgIwwflgs7ep4TVi=w240-h480-rw" alt="Poland TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">Poland TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=polska.pilka.nozna.koszykowka.filmy.online.na.zywo" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- India -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/nqfly7aitosyPIOczzUtWrG44OjMRUrML0rQyNu0fYt4yYPX-kTy4Hd61B11iEQyDXbbuKgx6m7x1KmtAhPa=w240-h480-rw" alt="India TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">India TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=india.tv.online.live.football.cricket.basketball" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Brasil -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/CTuunhjZ_kX-tc_sYOvtlTBl5N1KMqTe-ocxD8hEsIXReiwP3MdnSZTK49H05oGZYzxfghm8QH1TAoQM-1fLfw=w240-h480-rw" alt="Brasil TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">Brasil TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=brasil.tv.online.live.vivo.futebol.basketbol.praya" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Paraguay -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/JESfC0os91UqAU_yt99Cx1-swNxCgRBdifGiH-Mi2e6GVo5IRtqI9RVVJ-9r26DRloS4C82hJqtwyemWrouBlw=w240-h480-rw" alt="Paraguay TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">Paraguay TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=paraguay.tv.online.vivo.futbol.basketbol.live" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Algeria -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/5r1jvWJRDel1M86NWXIjNFgq1S3hxoj-LHP3HXR0R2Ac9SKGbOhHBO-bn1kynv3MKqQwyVAsx-H77YUb0DumlA=w480-h960-rw" alt="Algeria TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">Algeria TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=algeria.tv.online.football.basketball.live" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Saudi Arabia -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/p6gBQkHsHBkGmzlil7z8tJ4vTlBlwFVfTCGgcGGacUIqW_Nsc1zL47iMoIO--Ier1ORMQt9asJfppXdU-YH-=w480-h960-rw" alt="Saudi Arabia TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">Saudi Arabia TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=saudi.arabia.tv.online.football.basketball.live" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cambodia -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/tCt0cpRMUY-EcMjIJW7AcF33vaJvtcmNI1uEIxpKUZ7Jvm0kkucqr5DPfWqqC8jlLOePaRZc4CfKQSlDDrNV=w240-h480-rw" alt="Cambodia TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">Cambodia TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=cambodia.tv.online.football.basketball.live" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Venezuela -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/-jee5IqqgTiLHTRtUCY6s289Q0GyVCOPY9Ph4G_V3YzRE7z1q8kOBmxGFThTTrTYyQf4qGQc1etC3fYfnnuc-A=w240-h480-rw" alt="Venezuela TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">Venezuela TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=venezuela.tv.online.vivo.futbol.basquetbol.beisbol.live" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Ghana -->
-        <div class="column is-one-third">
-          <div class="card app-card">
-            <div class="card-image">
-              <figure class="image">
-                <img src="https://play-lh.googleusercontent.com/Z6fB51Cnck2aQkBhzjVW8Z7M1QINAq3oX5HmLU16UG-TYY92UVLHkm40xZspTjQsu6UCCAmT0bJt87576UrJ=w240-h480-rw" alt="Ghana TV Online App Icon">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-5">Ghana TV Online</p>
-              <p class="platform-badge platform-android">Android</p>
-              <a href="https://play.google.com/store/apps/details?id=ghana.tv.online.live.football.basketball" class="button is-store is-google is-fullwidth" target="_blank" rel="noopener">Google Play</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+          <h1 class="title is-2">Catálogo de apps, sin ruido</h1>
+          <p class="subtitle is-5">TV en vivo, deportes y entretenimiento. Disponible para Android y iOS.</p>
+          <div class="buttons">
+            <a class="button is-store is-google" href="https://play.google.com/store/apps/developer?id=ML+TV+APPS" target="_blank" rel="noopener">
 
   <!-- iOS SECTION -->
   <section id="ios" class="section">
@@ -554,14 +196,15 @@
   </section>
 
   <!-- TODAS (mantengo el anchor apps por compatibilidad con tu HTML original) -->
-  <section id="apps" class="section">
-    <div class="container has-text-centered">
-      <p>Descubre más apps en nuestro perfil de Google Play:</p>
+  <section id=\"apps\" class=\"section\">
+    <div class=\"container has-text-centered\">
+      <p>Descubre más apps en nuestros perfiles de desarrollador:<\/p>
       <p>
-        <a href="https://play.google.com/store/apps/developer?id=ML+TV+APPS" target="_blank" rel="noopener">ML TV Apps en Google Play</a>
-      </p>
-    </div>
-  </section>
+        <a href=\"https:\/\/play.google.com\/store\/apps\/developer?id=ML+TV+APPS\" target=\"_blank\" rel=\"noopener\">ML TV Apps en Google Play<\/a> · 
+        <a href=\"https:\/\/apps.apple.com\/us\/developer\/santiago-martinez-antequera\/id1688175834\" target=\"_blank\" rel=\"noopener\">Santiago Martínez Antequera en App Store<\/a>
+      <\/p>
+    <\/div>
+  <\/section>
 
   <footer class="footer">
     <div class="content has-text-centered">
