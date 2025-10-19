@@ -1,304 +1,661 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-theme="auto">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>ML TV Apps — Catálogo</title>
-  <meta name="description" content="Catálogo de apps de ML TV Apps para Android e iOS. Diseño limpio, rápido y sin ruido.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ML TV Apps</title>
+  <meta name="description" content="Catálogo de apps de TV en vivo, deportes y entretenimiento. Disponible para Android y iOS." />
+  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="ML TV Apps" />
+  <meta property="og:description" content="Catálogo de apps, sin ruido. Android e iOS." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ml-tv-apps.example" />
+  <meta property="og:image" content="/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Performance hints -->
   <link rel="preconnect" href="https://play-lh.googleusercontent.com" crossorigin>
   <link rel="preconnect" href="https://is1-ssl.mzstatic.com" crossorigin>
+  <link rel="preconnect" href="https://play.google.com" crossorigin>
+  <link rel="preconnect" href="https://apps.apple.com" crossorigin>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <!-- Manifiesto opcional PWA (añade /manifest.webmanifest y un SW si quieres modo offline) -->
+  <!-- <link rel="manifest" href="/manifest.webmanifest"> -->
+
   <style>
+    /* ====== Tokens 2025 ====== */
     :root{
-      --bg:#ffffff; --fg:#0b1220; --muted:#667085; --line:#e5e7eb; --accent:#111; --accent-2:#1a73e8;
-      --radius:14px; --shadow:0 6px 14px rgba(0,0,0,.06);
-      color-scheme:light dark;
+      --bg: #070b14;             /* dark base */
+      --bg-soft:#0a1222;         /* deep slate */
+      --surface:#0b1426;         /* card bg */
+      --surface-2:#0b1426cc;     /* glass */
+      --text:#e5e7eb;            /* light text */
+      --muted:#94a3b8;           /* slate-400 */
+      --brand:#22c55e;           /* emerald */
+      --brand-2:#10b981;         /* emerald mix */
+      --neon:#22d3ee;            /* cyan neon */
+      --neon-2:#7c3aed;          /* violet neon */
+      --ring: color-mix(in oklab, var(--neon) 70%, white);
+      --radius: 14px;
+      --shadow: 0 6px 18px 0 color-mix(in oklab, black 35%, transparent);
+      color-scheme: dark;
     }
-    @media (prefers-color-scheme:dark){
-      :root{ --bg:#0b1220; --fg:#e5e7eb; --muted:#94a3b8; --line:#1f2937; --accent:#e5e7eb; --accent-2:#3b82f6; }
+    /* Light scheme no-op: sitio forzado a dark by design */
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+
+    /* ====== Base ====== */
+    html,body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Noto Sans, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      line-height:1.5;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% -10%, color-mix(in oklab, var(--neon) 16%, transparent), transparent 60%),
+        radial-gradient(900px 500px at 100% 0%, color-mix(in oklab, var(--neon-2) 14%, transparent), transparent 55%),
+        linear-gradient(180deg, var(--bg-soft), var(--bg));
+      background-attachment: fixed;
+    }
     body{
-      margin:0; background:var(--bg); color:var(--fg);
-      font:400 16px/1.5 ui-sans-serif,system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial;
-      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Noto Sans, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      line-height:1.5;
+      background: linear-gradient(180deg, #ffffff, #f8fafc);
+      color: var(--text);
     }
-    .container{max-width:1100px;margin-inline:auto;padding:24px 16px}
-    /* Header */
-    header{padding:28px 0 8px;border-bottom:1px solid var(--line);margin-bottom:18px}
-    h1{margin:0;font-weight:800;letter-spacing:-.02em;font-size:clamp(26px,3.2vw,34px)}
-    .sub{margin:8px 0 0;color:var(--muted)}
-    .cta{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
-    .btn{appearance:none;border:1px solid var(--line);background:transparent;color:var(--accent);padding:.55rem .9rem;border-radius:999px;text-decoration:none;font-weight:700}
-    .btn:hover{border-color:var(--accent)}
-    .btn-google{border-color:color-mix(in oklab,var(--accent-2) 35%, var(--line));}
-    .btn-google:hover{border-color:var(--accent-2)}
-    /* Sections */
-    .section{padding:18px 0}
-    .section h2{margin:0 0 2px;font-size:clamp(18px,2.6vw,22px)}
-    .hint{color:var(--muted);margin:0 0 12px}
-    /* Grid: mínimo 4 por fila */
-    .grid{display:grid;gap:16px;grid-template-columns:repeat(4,minmax(0,1fr))}
-    @media (min-width:900px){.grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
-    @media (min-width:1200px){.grid{grid-template-columns:repeat(6,minmax(0,1fr))}}
-    /* Card */
-    .card{
-      display:flex;flex-direction:column;gap:10px;border:1px solid var(--line);
-      border-radius:12px;padding:12px;background:transparent;transition:box-shadow .12s ease, transform .12s ease;
+    @media (prefers-color-scheme: dark){
+      body{background:linear-gradient(180deg, var(--bg-soft), var(--surface))}
     }
-    .card:hover{box-shadow:var(--shadow);transform:translateY(-1px)}
-    .thumb{display:grid;place-items:center;aspect-ratio:1/1;border-radius:10px;border:1px solid var(--line);overflow:hidden;background:#fff}
-    @media (prefers-color-scheme:dark){.thumb{background:#0f172a}}
-    .thumb img{max-width:72%;max-height:72%;object-fit:contain}
-    .title{font-weight:700;font-size:.98rem;margin:0;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
-    .plat{display:inline-flex;align-items:center;gap:8px;justify-content:center;color:var(--muted);font-size:.78rem}
-    .plat img{width:16px;height:16px;object-fit:contain;border-radius:4px}
-    .store{margin-top:2px}
-    .store a{display:block;text-align:center;border:1px solid var(--line);padding:.5rem .6rem;border-radius:8px;text-decoration:none;color:var(--accent);font-weight:700}
-    .store a:hover{border-color:var(--accent)}
-    footer{margin:28px 0 8px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:.95rem}
+    .container{max-width:1100px;margin-inline:auto;padding-inline:16px}
+    .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+    /* ====== Navbar (glass, sticky) ====== */
+    .nav{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:saturate(160%) blur(10px);
+      -webkit-backdrop-filter:saturate(160%) blur(10px);
+      background: color-mix(in oklab, var(--surface) 82%, transparent);
+      border-bottom:1px solid color-mix(in oklab, var(--neon) 22%, transparent);
+      box-shadow: 0 0 0 1px color-mix(in oklab, var(--neon) 10%, transparent), 0 8px 24px rgba(0,0,0,.35);
+    }
+    @media (prefers-color-scheme: dark){
+      .nav{background: color-mix(in oklab, var(--surface) 72%, transparent);border-color: color-mix(in oklab, white 6%, transparent)}
+    }
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 0}
+    .brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;color:inherit}
+    .brand-logo{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg, var(--neon), var(--neon-2));box-shadow:0 0 0 2px rgba(255,255,255,.06), 0 0 24px color-mix(in oklab, var(--neon) 45%, transparent)}
+    .brand-logo svg{width:20px;height:20px}
+    .brand-title{font-weight:800;letter-spacing:-.2px}
+    .brand-sub{opacity:.65;font-size:.9rem}
+    .nav-links{display:flex;align-items:center;gap:.5rem}
+    .nav a{padding:.55rem .8rem;border-radius:999px;text-decoration:none;color:inherit}
+    .nav a:hover{background:color-mix(in oklab, var(--brand) 22%, transparent)}
+
+    /* Mobile burger */
+    .burger{display:none;flex-direction:column;gap:4px;border:0;background:transparent}
+    .burger span{display:block;width:22px;height:2px;background:currentColor;border-radius:2px}
+    @media (max-width: 760px){
+      .nav-links{display:none}
+      .nav-links.is-open{display:flex;position:absolute;left:16px;right:16px;top:56px;background:var(--surface-2);backdrop-filter:blur(8px);padding:10px;border:1px solid color-mix(in oklab, white 10%, transparent);border-radius:12px;flex-direction:column}
+      .burger{display:flex}
+    }
+
+    /* ====== Hero ====== */
+    .hero{position:relative;padding:64px 0 72px;color:#fff;background:linear-gradient(180deg, #0b1426, #090f1d);overflow:hidden}
+    .hero::after{content:"";position:absolute;inset:-20% -10% auto -10%;height:60%;background:radial-gradient(closest-side, color-mix(in oklab, var(--neon) 28%, transparent), transparent 70%);filter:blur(40px);opacity:.7;pointer-events:none}
+    .hero h1{margin:0 0 8px;font-size:clamp(28px, 5vw, 44px);letter-spacing:-.3px}
+    .hero p{margin:0 0 16px;opacity:.95}
+    .hero .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .btn{--btn-bg:#0e182d;--btn-fg:#e5e7eb;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.7rem 1rem;border-radius:12px;font-weight:700;text-decoration:none;color:var(--btn-fg);background:var(--btn-bg);box-shadow:0 0 0 1px color-mix(in oklab, var(--neon) 20%, #1f2937);transition:transform .15s ease, box-shadow .15s ease}
+    .btn:hover{transform:translateY(-1px);box-shadow:0 0 0 2px color-mix(in oklab, var(--neon) 45%, #1f2937), 0 0 28px color-mix(in oklab, var(--neon) 28%, transparent)}
+    .btn-google{--btn-bg:#0b1730}
+    .btn-apple{--btn-bg:#0b0f18}
+    .btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px color-mix(in oklab, black 22%, transparent)}
+    .btn-google{--btn-bg:#1a73e8}
+    .btn-apple{--btn-bg:#111}
+
+    /* ====== Toolbar (buscador + filtros) ====== */
+    .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:18px 0}
+    .search{flex:1;min-width:240px;display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid color-mix(in oklab, var(--text) 10%, transparent);border-radius:12px;background:color-mix(in oklab, white 70%, transparent)}
+    @media (prefers-color-scheme: dark){
+      .search{background:color-mix(in oklab, var(--surface) 85%, transparent);border-color: color-mix(in oklab, white 14%, transparent)}
+    }
+    .search input{flex:1;border:0;outline:none;background:transparent;color:inherit;font-size:1rem}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{padding:.4rem .8rem;border:1px solid color-mix(in oklab, var(--text) 10%, transparent);border-radius:999px;cursor:pointer;user-select:none}
+    .chip[aria-pressed="true"]{background:color-mix(in oklab, var(--brand) 18%, transparent);border-color:color-mix(in oklab, var(--brand) 35%, transparent)}
+
+    /* ====== Grids ====== */
+    .section{padding:32px 0}
+    .section h2{margin:0 0 6px;font-size:clamp(22px, 3.2vw, 32px)}
+    .hint{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(12, 1fr);gap:16px}
+    .col-12{grid-column:span 12}
+    .apps{--cols:1;display:grid;grid-template-columns:repeat(var(--cols), minmax(0,1fr));gap:16px}
+    @container (min-width: 540px){.apps{--cols:2}}
+    @container (min-width: 760px){.apps{--cols:3}}
+    @container (min-width: 1024px){.apps{--cols:4}}
+
+    /* Enable container queries */
+    .apps{container-type:inline-size}
+
+    /* ====== Card ====== */
+    .card{border-radius:var(--radius);overflow:hidden;background:var(--surface);border:1px solid color-mix(in oklab, var(--neon) 8%, #1f2937);box-shadow:var(--shadow);display:flex;flex-direction:column;height:100%;transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease}
+    .card:hover{transform:translateY(-2px);border-color: color-mix(in oklab, var(--neon) 40%, #1f2937);box-shadow:0 0 0 2px color-mix(in oklab, var(--neon) 35%, transparent), 0 16px 36px rgba(0,0,0,.45)}
+    @media (prefers-color-scheme: dark){
+      .card{background:color-mix(in oklab, var(--surface) 86%, transparent)}
+    }
+    .thumb{position:relative;display:grid;place-items:center;aspect-ratio:16/10;background:linear-gradient(180deg,#0b162b,#0a1222)}
+    @media (prefers-color-scheme: dark){.thumb{background:#0b0b0b}}
+    .thumb img{max-width:90%;max-height:75%;object-fit:contain;filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+    .plat{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:10px;background:rgba(10,16,28,.85);display:grid;place-items:center;border:1px solid color-mix(in oklab, var(--neon) 25%, #0b1220);box-shadow:0 0 16px color-mix(in oklab, var(--neon) 25%, transparent)}
+    @media (prefers-color-scheme: dark){.plat{background:rgba(20,20,20,.9);border-color:rgba(255,255,255,.1)}}
+    .plat img{width:100%;height:100%;object-fit:contain;border-radius:8px}
+    .content{padding:14px;display:flex;flex-direction:column;gap:10px;text-align:center}
+    .content h3{margin:0;font-size:1.05rem}
+    .btn-store{--btn-bg:var(--brand);--btn-fg:#06240f}
+    .btn-google-store{--btn-bg:#1a73e8;--btn-fg:#fff}
+    .btn-apple-store{--btn-bg:#111;--btn-fg:#fff}
+
+    /* ====== Footer ====== */
+    footer{padding:28px 0;border-top:1px solid color-mix(in oklab, var(--neon) 18%, #1f2937);text-shadow:0 0 18px color-mix(in oklab, var(--neon) 20%, transparent)}
+    small{color:var(--muted)}
+
+    /* ====== Motion preferences ====== */
+    @media (prefers-reduced-motion: reduce){
+      *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>ML TV Apps</h1>
-      <p class="sub">Apps publicadas para Android e iOS — diseño limpio, rápido y sin ruido.</p>
-      <div class="cta">
-        <a class="btn btn-google" href="https://play.google.com/store/apps/developer?id=ML+TV+APPS" target="_blank" rel="noopener">Ver en Google Play</a>
-        <a class="btn" href="https://apps.apple.com/us/developer/santiago-martinez-antequera/id1688175834" target="_blank" rel="noopener">Ver en App&nbsp;Store</a>
+  <!-- NAV -->
+  <nav class="nav" aria-label="Principal">
+    <div class="container nav-inner">
+      <a class="brand" href="#">
+        <span class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M4 12a8 8 0 1 1 16 0v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6z" fill="#22c55e" opacity="0.9"/>
+            <path d="M8 13.5h2.75L12 16l1.25-2.5H16l-4-7-4 7z" fill="#fff"/>
+          </svg>
+        </span>
+        <span>
+          <span class="brand-title">ML TV Apps</span>
+          <span class="brand-sub">&nbsp;by ML</span>
+        </span>
+      </a>
+      <button class="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+      <div id="menu" class="nav-links" role="navigation">
+        <a href="#android">Android</a>
+        <a href="#ios">iOS</a>
+        <a href="#apps">Todas</a>
+        <a href="https://play.google.com/store/apps/developer?id=ML+TV+APPS" target="_blank" rel="noopener">Perfil Google Play</a>
+        <a href="https://apps.apple.com/us/developer/santiago-martinez-antequera/id1688175834" target="_blank" rel="noopener">Perfil App Store</a>
       </div>
-    </header>
+    </div>
+  </nav>
 
-    <section class="section" id="android" aria-labelledby="h-android">
-      <h2 id="h-android">Android</h2>
-      <p class="hint">Publicadas en Google Play</p>
-      <div class="grid">
-        <!-- Malaysia -->
-        <article class="card" title="Malaysia TV Online">
-          <div class="thumb">
-            <img loading="lazy" decoding="async" alt="Malaysia TV Online"
-                 src="https://play-lh.googleusercontent.com/7whWswBybe9g-n3YLI2-aMU2UP5c12EpK0Gmb-Vdm_5xDNKkZknolAu0kwIdK1WvNSg=w240-h480-rw">
-          </div>
-          <p class="title">Malaysia TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=talian.sepak.takraw.pencak.silat.bola.televisyen.dalam" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- Russia -->
-        <article class="card" title="Russia TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Russia TV Online" src="https://play-lh.googleusercontent.com/bTJvnpysga5BN9Kd8J-h9-Fq0h4cHdr8WnK4FkGXB6Q7UanHsNX4zLeqgg5eqnxaGA=w240-h480-rw"></div>
-          <p class="title">Russia TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=russia.tv.online.live.football.hockey.com" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- Bangladesh -->
-        <article class="card" title="Bangladesh TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Bangladesh TV Online" src="https://play-lh.googleusercontent.com/ftFaG9obBUI50tvo-H_ureCJJmyvai3RkVcP3lFao4aTKYAIJ_dlaZ4r4mtxXUZ4Sw=w240-h480-rw"></div>
-          <p class="title">Bangladesh TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=bangladesh.tv.live.football.cricket.basketball" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- Ukraine -->
-        <article class="card" title="Ukraine TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Ukraine TV Online" src="https://play-lh.googleusercontent.com/KrhJ65J_SNCOa1dJdyonEboNG36XhXdzhK3Y0quFXrnb81dbxNOwAr5JWzjcg-7j6A=w240-h480-rw"></div>
-          <p class="title">Ukraine TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=ukraine.ukrayina.football.basketball.livetv.online" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- España -->
-        <article class="card" title="Spain TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Spain TV Online" src="https://play-lh.googleusercontent.com/na2acdYEgOx-SZMNW3D6CRVbZY-xtm-PqKi32TLCNfPacxkMTK5-uHrSGivbP3A6zq4=w480-h960"></div>
-          <p class="title">Spain TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=espana.spain.tv.online.live.en.directo.futbol.formula.uno.deportes" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- Mongolia -->
-        <article class="card" title="Mongolia TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Mongolia TV Online" src="https://play-lh.googleusercontent.com/e1MChNAwAdeQDA19U_5d9omDT4cU2azbmNUzhV8-v6QZhrDOxCOeJN-Wih53aEw2fc00=w240-h480-rw"></div>
-          <p class="title">Mongolia TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=mongolia.tv.mongol.uls.online.live.football.horses.bokh.naadam" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- Uruguay -->
-        <article class="card" title="Uruguay TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Uruguay TV Online" src="https://play-lh.googleusercontent.com/T3Equ6QYsXNp-jdpvlXidoeFwbsLwUU6BrMXDgxClW8hzk6cQDSBgCUsq1E0lxAlgOgZEFVWdvzQa03jlJHm=w480-h960"></div>
-          <p class="title">Uruguay TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=uruguay.tv.online.vivo.futbol.basketbol.live" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- Thailand -->
-        <article class="card" title="Thailand TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Thailand TV Online" src="https://play-lh.googleusercontent.com/18bRvYe7FskOY0tG9XNw25wwzejVdnlznWcWw3QKosebMVKE05Ux7N6_JbDrSUdQ3vmcAo3tT-5N-9tgpso1Zg=w240-h480-rw"></div>
-          <p class="title">Thailand TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=thailand.tv.online.live.football.muay.thai" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- South Korea -->
-        <article class="card" title="South Korea TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="South Korea TV Online" src="https://play-lh.googleusercontent.com/KiCTUrXdfVft3QWAVX-GlouR97XtjqoUcmWZ7lz7AQIOZFrLz_qIG0TLA4mIkKQGbPnubknIEZ-c_rrhKgk=w240-h480-rw"></div>
-          <p class="title">South Korea TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=taekwondo.south.kore.tv.live.online.football.basketball" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- Nigeria -->
-        <article class="card" title="Nigeria TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Nigeria TV Online" src="https://play-lh.googleusercontent.com/4WhgNK8CU6Jiq3ZDYINMcO58l3fNO6b5Em19HsqYPIgu5Z9ZD_IxTYQIC4iRcLOVkOkQq8CPYjs8nK1sRiat=w240-h480-rw"></div>
-          <p class="title">Nigeria TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=nigeria.tv.online.live.football.basketball" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- Egypt -->
-        <article class="card" title="Egypt TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Egypt TV Online" src="https://play-lh.googleusercontent.com/p7qqwDjvF3xkGEyMTT3oZynCGrooSFO4DAdORbDPZcum7vZhDy0PvsUz9hU5AeSATq4WNh5Biu4zxaSrvCd5=w240-h480-rw"></div>
-          <p class="title">Egypt TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=egypt.tv.online.football.basketball.series.films" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- Ethiopia -->
-        <article class="card" title="Ethiopia TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Ethiopia TV Online" src="https://play-lh.googleusercontent.com/lUqA-QKXLSDjZdN4R698Y6yGR4gmCLPyFbWBIp75P38Uc-MGK8VtW-C1fisXgFprllX6_3a0EKvIAcJE1iECAA=w480-h960"></div>
-          <p class="title">Ethiopia TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=ethiopia.tv.online.live.football.basketball" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- Poland -->
-        <article class="card" title="Poland TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Poland TV Online" src="https://play-lh.googleusercontent.com/gY-SPy5ewewyrcRvbQIImTnZ9WVdmUY8CdJ2Jr_l_zG2kaQsg9TsuGOiAJU4g-TRJAAZPgIwwflgs7ep4TVi=w240-h480-rw"></div>
-        <p class="title">Poland TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=polska.pilka.nozna.koszykowka.filmy.online.na.zywo" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- India -->
-        <article class="card" title="India TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="India TV Online" src="https://play-lh.googleusercontent.com/nqfly7aitosyPIOczzUtWrG44OjMRUrML0rQyNu0fYt4yYPX-kTy4Hd61B11iEQyDXbbuKgx6m7x1KmtAhPa=w240-h480-rw"></div>
-          <p class="title">India TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=india.tv.online.live.football.cricket.basketball" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- Brasil -->
-        <article class="card" title="Brasil TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Brasil TV Online" src="https://play-lh.googleusercontent.com/CTuunhjZ_kX-tc_sYOvtlTBl5N1KMqTe-ocxD8hEsIXReiwP3MdnSZTK49H05oGZYzxfghm8QH1TAoQM-1fLfw=w240-h480-rw"></div>
-          <p class="title">Brasil TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=brasil.tv.online.live.vivo.futebol.basketbol.praya" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- Paraguay -->
-        <article class="card" title="Paraguay TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Paraguay TV Online" src="https://play-lh.googleusercontent.com/JESfC0os91UqAU_yt99Cx1-swNxCgRBdifGiH-Mi2e6GVo5IRtqI9RVVJ-9r26DRloS4C82hJqtwyemWrouBlw=w240-h480-rw"></div>
-          <p class="title">Paraguay TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=paraguay.tv.online.vivo.futbol.basketbol.live" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- Algeria -->
-        <article class="card" title="Algeria TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Algeria TV Online" src="https://play-lh.googleusercontent.com/5r1jvWJRDel1M86NWXIjNFgq1S3hxoj-LHP3HXR0R2Ac9SKGbOhHBO-bn1kynv3MKqQwyVAsx-H77YUb0DumlA=w480-h960-rw"></div>
-          <p class="title">Algeria TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=algeria.tv.online.football.basketball.live" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- Saudi Arabia -->
-        <article class="card" title="Saudi Arabia TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Saudi Arabia TV Online" src="https://play-lh.googleusercontent.com/p6gBQkHsHBkGmzlil7z8tJ4vTlBlwFVfTCGgcGGacUIqW_Nsc1zL47iMoIO--Ier1ORMQt9asJfppXdU-YH-=w480-h960-rw"></div>
-          <p class="title">Saudi Arabia TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=saudi.arabia.tv.online.football.basketball.live" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- Cambodia -->
-        <article class="card" title="Cambodia TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Cambodia TV Online" src="https://play-lh.googleusercontent.com/tCt0cpRMUY-EcMjIJW7AcF33vaJvtcmNI1uEIxpKUZ7Jvm0kkucqr5DPfWqqC8jlLOePaRZc4CfKQSlDDrNV=w240-h480-rw"></div>
-          <p class="title">Cambodia TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=cambodia.tv.online.football.basketball.live" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- Venezuela -->
-        <article class="card" title="Venezuela TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Venezuela TV Online" src="https://play-lh.googleusercontent.com/-jee5IqqgTiLHTRtUCY6s289Q0GyVCOPY9Ph4G_V3YzRE7z1q8kOBmxGFThTTrTYyQf4qGQc1etC3fYfnnuc-A=w240-h480-rw"></div>
-          <p class="title">Venezuela TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=venezuela.tv.online.vivo.futbol.basquetbol.beisbol.live" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
-        <!-- Ghana -->
-        <article class="card" title="Ghana TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Ghana TV Online" src="https://play-lh.googleusercontent.com/Z6fB51Cnck2aQkBhzjVW8Z7M1QINAq3oX5HmLU16UG-TYY92UVLHkm40xZspTjQsu6UCCAmT0bJt87576UrJ=w240-h480-rw"></div>
-          <p class="title">Ghana TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="">Android</div>
-          <div class="store"><a href="https://play.google.com/store/apps/details?id=ghana.tv.online.live.football.basketball" target="_blank" rel="noopener">Google Play</a></div>
-        </article>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container">
+      <h1>Catálogo de apps, sin ruido</h1>
+      <p>TV en vivo, deportes y entretenimiento. Disponible para Android y iOS.</p>
+      <div class="actions">
+        <a class="btn btn-google" href="https://play.google.com/store/apps/developer?id=ML+TV+APPS" target="_blank" rel="noopener">Ver perfil en Google Play</a>
+        <a class="btn btn-apple" href="https://apps.apple.com/us/developer/santiago-martinez-antequera/id1688175834" target="_blank" rel="noopener">Ver perfil en App Store</a>
       </div>
-    </section>
+    </div>
+  </header>
 
-    <section class="section" id="ios" aria-labelledby="h-ios">
-      <h2 id="h-ios">iOS</h2>
-      <p class="hint">Publicadas en App Store</p>
-      <div class="grid">
-        <!-- Romania -->
-        <article class="card" title="Romania Televiziune în Direct">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Romania Televiziune în Direct" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ba/c8/ca/bac8ca0f-6487-4997-405d-9e277b1767f2/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/230x0w.webp"></div>
-          <p class="title">Romania Televiziune în Direct</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/ios.png" alt="">iOS</div>
-          <div class="store"><a href="https://apps.apple.com/us/app/romania-televiziune-in-direct/id6553993992" target="_blank" rel="noopener">App Store</a></div>
-        </article>
-        <!-- España TDT -->
-        <article class="card" title="España TDT TV Online">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="España TDT TV Online" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/96/4e/01/964e0134-e37c-a8ff-e0af-b10fd96fa1a7/AppIcon-0-0-1x_U007ephone-0-85-220.png/230x0w.webp"></div>
-          <p class="title">España TDT TV Online</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/ios.png" alt="">iOS</div>
-          <div class="store"><a href="https://apps.apple.com/us/app/espa%C3%B1a-tdt-tv-online/id6449784468" target="_blank" rel="noopener">App Store</a></div>
-        </article>
-        <!-- Indonesia -->
-        <article class="card" title="Televisi Indonesia Langsung">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Televisi Indonesia Langsung" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/21/0e/50/210e5034-b839-3a1b-dc21-11243e1d2c9f/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/246x0w.webp"></div>
-          <p class="title">Televisi Indonesia Langsung</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/ios.png" alt="">iOS</div>
-          <div class="store"><a href="https://apps.apple.com/us/app/televisi-indonesia-langsung/id6753112680" target="_blank" rel="noopener">App Store</a></div>
-        </article>
-        <!-- UK -->
-        <article class="card" title="UK Live TV Channels">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="UK Live TV Channels" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/0f/b6/e6/0fb6e678-b69c-d4d8-0ead-736c2d026e19/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/230x0w.webp"></div>
-          <p class="title">UK Live TV Channels</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/ios.png" alt="">iOS</div>
-          <div class="store"><a href="https://apps.apple.com/us/app/uk-live-tv-channels/id6753579675" target="_blank" rel="noopener">App Store</a></div>
-        </article>
-        <!-- Japan -->
-        <article class="card" title="Japan Live TV">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Japan Live TV" src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/7f/ed/b3/7fedb3dc-98f9-d0fe-f3da-7fd2a0504883/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/230x0w.webp"></div>
-          <p class="title">Japan Live TV</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/ios.png" alt="">iOS</div>
-          <div class="store"><a href="https://apps.apple.com/us/app/%E6%97%A5%E6%9C%AC%E3%81%AE%E3%83%86%E3%83%AC%E3%83%93%E6%94%BE%E9%80%81/id6753619478" target="_blank" rel="noopener">App Store</a></div>
-        </article>
-        <!-- México -->
-        <article class="card" title="Mexico TV En Vivo">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Mexico TV En Vivo" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/82/c7/00/82c70092-0485-a500-7005-19c049a7b1c6/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/230x0w.webp"></div>
-          <p class="title">Mexico TV En Vivo</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/ios.png" alt="">iOS</div>
-          <div class="store"><a href="https://apps.apple.com/us/app/mexico-tv-en-vivo/id6754038061" target="_blank" rel="noopener">App Store</a></div>
-        </article>
-        <!-- IPTV Pro Max -->
-        <article class="card" title="IPTV Pro Max">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="IPTV Pro Max" src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/5f/1b/10/5f1b101a-ebb5-a42f-d2c1-ed8f01c8fc48/AppIcon-0-0-1x_U007epad-0-1-85-220.jpeg/230x0w.webp"></div>
-          <p class="title">IPTV Pro Max</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/ios.png" alt="">iOS</div>
-          <div class="store"><a href="https://apps.apple.com/us/app/iptv-pro-max/id6738427819" target="_blank" rel="noopener">App Store</a></div>
-        </article>
-        <!-- Ball Invaders -->
-        <article class="card" title="Ball Invaders: Retro Shooter">
-          <div class="thumb"><img loading="lazy" decoding="async" alt="Ball Invaders: Retro Shooter" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/eb/eb/8b/ebeb8bb5-a927-1862-5e94-822e056a366a/AppIcon-0-0-1x_U007ephone-0-0-85-220.png/230x0w.webp"></div>
-          <p class="title">Ball Invaders: Retro Shooter</p>
-          <div class="plat"><img src="https://juanjomanzana.github.io/ios.png" alt="">iOS</div>
-          <div class="store"><a href="https://apps.apple.com/us/app/ball-invaders-retro-shooter/id6504813335" target="_blank" rel="noopener">App Store</a></div>
-        </article>
-      </div>
-    </section>
-
-    <footer>
-      © <span id="y"></span> ML TV Apps · Todas las marcas pertenecen a sus respectivos propietarios.
-    </footer>
+  <!-- Toolbar global -->
+  <div class="container toolbar" role="region" aria-label="Buscador y filtros">
+    <label class="search" for="q">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/></svg>
+      <input id="q" type="search" placeholder="Buscar país, app…" autocomplete="off" />
+    </label>
+    <div class="chips" role="group" aria-label="Filtrar por plataforma">
+      <button class="chip" data-filter="all" aria-pressed="true">Todas</button>
+      <button class="chip" data-filter="android">Android</button>
+      <button class="chip" data-filter="ios">iOS</button>
+    </div>
   </div>
 
+  <main id="content" class="container" tabindex="-1">
+    <!-- ANDROID -->
+    <section id="android" class="section" aria-labelledby="h-android">
+      <div class="grid">
+        <div class="col-12">
+          <h2 id="h-android">Android</h2>
+          <p class="hint">Publicadas en Google Play</p>
+        </div>
+        <div class="col-12">
+          <div class="apps" id="apps-android">
+            <!-- Malaysia -->
+            <article class="card" data-platform="android" data-name="Malaysia TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/7whWswBybe9g-n3YLI2-aMU2UP5c12EpK0Gmb-Vdm_5xDNKkZknolAu0kwIdK1WvNSg=w240-h480-rw" alt="Malaysia TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>Malaysia TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=talian.sepak.takraw.pencak.silat.bola.televisyen.dalam" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- Russia -->
+            <article class="card" data-platform="android" data-name="Russia TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/bTJvnpysga5BN9Kd8J-h9-Fq0h4cHdr8WnK4FkGXB6Q7UanHsNX4zLeqgg5eqnxaGA=w240-h480-rw" alt="Russia TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>Russia TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=russia.tv.online.live.football.hockey.com" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- Bangladesh -->
+            <article class="card" data-platform="android" data-name="Bangladesh TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/ftFaG9obBUI50tvo-H_ureCJJmyvai3RkVcP3lFao4aTKYAIJ_dlaZ4r4mtxXUZ4Sw=w240-h480-rw" alt="Bangladesh TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>Bangladesh TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=bangladesh.tv.live.football.cricket.basketball" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- Ukraine -->
+            <article class="card" data-platform="android" data-name="Ukraine TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/KrhJ65J_SNCOa1dJdyonEboNG36XhXdzhK3Y0quFXrnb81dbxNOwAr5JWzjcg-7j6A=w240-h480-rw" alt="Ukraine TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>Ukraine TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=ukraine.ukrayina.football.basketball.livetv.online" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- España -->
+            <article class="card" data-platform="android" data-name="Spain TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/na2acdYEgOx-SZMNW3D6CRVbZY-xtm-PqKi32TLCNfPacxkMTK5-uHrSGivbP3A6zq4=w480-h960" alt="Spain TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>Spain TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=espana.spain.tv.online.live.en.directo.futbol.formula.uno.deportes" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- Mongolia -->
+            <article class="card" data-platform="android" data-name="Mongolia TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/e1MChNAwAdeQDA19U_5d9omDT4cU2azbmNUzhV8-v6QZhrDOxCOeJN-Wih53aEw2fc00=w240-h480-rw" alt="Mongolia TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>Mongolia TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=mongolia.tv.mongol.uls.online.live.football.horses.bokh.naadam" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- Uruguay -->
+            <article class="card" data-platform="android" data-name="Uruguay TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/T3Equ6QYsXNp-jdpvlXidoeFwbsLwUU6BrMXDgxClW8hzk6cQDSBgCUsq1E0lxAlgOgZEFVWdvzQa03jlJHm=w480-h960" alt="Uruguay TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>Uruguay TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=uruguay.tv.online.vivo.futbol.basketbol.live" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- Thailand -->
+            <article class="card" data-platform="android" data-name="Thailand TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/18bRvYe7FskOY0tG9XNw25wwzejVdnlznWcWw3QKosebMVKE05Ux7N6_JbDrSUdQ3vmcAo3tT-5N-9tgpso1Zg=w240-h480-rw" alt="Thailand TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>Thailand TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=thailand.tv.online.live.football.muay.thai" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- South Korea -->
+            <article class="card" data-platform="android" data-name="South Korea TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/KiCTUrXdfVft3QWAVX-GlouR97XtjqoUcmWZ7lz7AQIOZFrLz_qIG0TLA4mIkKQGbPnubknIEZ-c_rrhKgk=w240-h480-rw" alt="South Korea TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>South Korea TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=taekwondo.south.kore.tv.live.online.football.basketball" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- Nigeria -->
+            <article class="card" data-platform="android" data-name="Nigeria TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/4WhgNK8CU6Jiq3ZDYINMcO58l3fNO6b5Em19HsqYPIgu5Z9ZD_IxTYQIC4iRcLOVkOkQq8CPYjs8nK1sRiat=w240-h480-rw" alt="Nigeria TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>Nigeria TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=nigeria.tv.online.live.football.basketball" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- Egypt -->
+            <article class="card" data-platform="android" data-name="Egypt TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/p7qqwDjvF3xkGEyMTT3oZynCGrooSFO4DAdORbDPZcum7vZhDy0PvsUz9hU5AeSATq4WNh5Biu4zxaSrvCd5=w240-h480-rw" alt="Egypt TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>Egypt TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=egypt.tv.online.football.basketball.series.films" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- Ethiopia -->
+            <article class="card" data-platform="android" data-name="Ethiopia TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/lUqA-QKXLSDjZdN4R698Y6yGR4gmCLPyFbWBIp75P38Uc-MGK8VtW-C1fisXgFprllX6_3a0EKvIAcJE1iECAA=w480-h960" alt="Ethiopia TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>Ethiopia TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=ethiopia.tv.online.live.football.basketball" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- Poland -->
+            <article class="card" data-platform="android" data-name="Poland TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/gY-SPy5ewewyrcRvbQIImTnZ9WVdmUY8CdJ2Jr_l_zG2kaQsg9TsuGOiAJU4g-TRJAAZPgIwwflgs7ep4TVi=w240-h480-rw" alt="Poland TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>Poland TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=polska.pilka.nozna.koszykowka.filmy.online.na.zywo" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- India -->
+            <article class="card" data-platform="android" data-name="India TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/nqfly7aitosyPIOczzUtWrG44OjMRUrML0rQyNu0fYt4yYPX-kTy4Hd61B11iEQyDXbbuKgx6m7x1KmtAhPa=w240-h480-rw" alt="India TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>India TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=india.tv.online.live.football.cricket.basketball" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- Brasil -->
+            <article class="card" data-platform="android" data-name="Brasil TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/CTuunhjZ_kX-tc_sYOvtlTBl5N1KMqTe-ocxD8hEsIXReiwP3MdnSZTK49H05oGZYzxfghm8QH1TAoQM-1fLfw=w240-h480-rw" alt="Brasil TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>Brasil TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=brasil.tv.online.live.vivo.futebol.basketbol.praya" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- Paraguay -->
+            <article class="card" data-platform="android" data-name="Paraguay TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/JESfC0os91UqAU_yt99Cx1-swNxCgRBdifGiH-Mi2e6GVo5IRtqI9RVVJ-9r26DRloS4C82hJqtwyemWrouBlw=w240-h480-rw" alt="Paraguay TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>Paraguay TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=paraguay.tv.online.vivo.futbol.basketbol.live" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- Algeria -->
+            <article class="card" data-platform="android" data-name="Algeria TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/5r1jvWJRDel1M86NWXIjNFgq1S3hxoj-LHP3HXR0R2Ac9SKGbOhHBO-bn1kynv3MKqQwyVAsx-H77YUb0DumlA=w480-h960-rw" alt="Algeria TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>Algeria TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=algeria.tv.online.football.basketball.live" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- Saudi Arabia -->
+            <article class="card" data-platform="android" data-name="Saudi Arabia TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/p6gBQkHsHBkGmzlil7z8tJ4vTlBlwFVfTCGgcGGacUIqW_Nsc1zL47iMoIO--Ier1ORMQt9asJfppXdU-YH-=w480-h960-rw" alt="Saudi Arabia TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>Saudi Arabia TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=saudi.arabia.tv.online.football.basketball.live" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- Cambodia -->
+            <article class="card" data-platform="android" data-name="Cambodia TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/tCt0cpRMUY-EcMjIJW7AcF33vaJvtcmNI1uEIxpKUZ7Jvm0kkucqr5DPfWqqC8jlLOePaRZc4CfKQSlDDrNV=w240-h480-rw" alt="Cambodia TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>Cambodia TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=cambodia.tv.online.football.basketball.live" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- Venezuela -->
+            <article class="card" data-platform="android" data-name="Venezuela TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/-jee5IqqgTiLHTRtUCY6s289Q0GyVCOPY9Ph4G_V3YzRE7z1q8kOBmxGFThTTrTYyQf4qGQc1etC3fYfnnuc-A=w240-h480-rw" alt="Venezuela TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>Venezuela TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=venezuela.tv.online.vivo.futbol.basquetbol.beisbol.live" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+            <!-- Ghana -->
+            <article class="card" data-platform="android" data-name="Ghana TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://play-lh.googleusercontent.com/Z6fB51Cnck2aQkBhzjVW8Z7M1QINAq3oX5HmLU16UG-TYY92UVLHkm40xZspTjQsu6UCCAmT0bJt87576UrJ=w240-h480-rw" alt="Ghana TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/android.png" alt="Android"></span>
+              </div>
+              <div class="content">
+                <h3>Ghana TV Online</h3>
+                <a class="btn btn-google-store" href="https://play.google.com/store/apps/details?id=ghana.tv.online.live.football.basketball" target="_blank" rel="noopener">Google Play</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- iOS -->
+    <section id="ios" class="section" aria-labelledby="h-ios">
+      <div class="grid">
+        <div class="col-12">
+          <h2 id="h-ios">iOS</h2>
+          <p class="hint">Publicadas en App Store</p>
+        </div>
+        <div class="col-12">
+          <div class="apps" id="apps-ios">
+            <!-- Romania TV -->
+            <article class="card" data-platform="ios" data-name="Romania Televiziune în Direct">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ba/c8/ca/bac8ca0f-6487-4997-405d-9e277b1767f2/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/230x0w.webp" alt="Romania Televiziune în Direct App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/ios.png" alt="iOS"></span>
+              </div>
+              <div class="content">
+                <h3>Romania Televiziune în Direct</h3>
+                <a class="btn btn-apple-store" href="https://apps.apple.com/us/app/romania-televiziune-in-direct/id6553993992" target="_blank" rel="noopener">App Store</a>
+              </div>
+            </article>
+            <!-- España TDT TV Online -->
+            <article class="card" data-platform="ios" data-name="España TDT TV Online">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/96/4e/01/964e0134-e37c-a8ff-e0af-b10fd96fa1a7/AppIcon-0-0-1x_U007ephone-0-85-220.png/230x0w.webp" alt="España TDT TV Online App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/ios.png" alt="iOS"></span>
+              </div>
+              <div class="content">
+                <h3>España TDT TV Online</h3>
+                <a class="btn btn-apple-store" href="https://apps.apple.com/us/app/espa%C3%B1a-tdt-tv-online/id6449784468" target="_blank" rel="noopener">App Store</a>
+              </div>
+            </article>
+            <!-- Televisi Indonesia Langsung -->
+            <article class="card" data-platform="ios" data-name="Televisi Indonesia Langsung">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/21/0e/50/210e5034-b839-3a1b-dc21-11243e1d2c9f/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/246x0w.webp" alt="Televisi Indonesia Langsung App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/ios.png" alt="iOS"></span>
+              </div>
+              <div class="content">
+                <h3>Televisi Indonesia Langsung</h3>
+                <a class="btn btn-apple-store" href="https://apps.apple.com/us/app/televisi-indonesia-langsung/id6753112680" target="_blank" rel="noopener">App Store</a>
+              </div>
+            </article>
+            <!-- UK Live TV Channels -->
+            <article class="card" data-platform="ios" data-name="UK Live TV Channels">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/0f/b6/e6/0fb6e678-b69c-d4d8-0ead-736c2d026e19/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/230x0w.webp" alt="UK Live TV Channels Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/ios.png" alt="iOS"></span>
+              </div>
+              <div class="content">
+                <h3>UK Live TV Channels</h3>
+                <a class="btn btn-apple-store" href="https://apps.apple.com/us/app/uk-live-tv-channels/id6753579675" target="_blank" rel="noopener">App Store</a>
+              </div>
+            </article>
+            <!-- Japan TV -->
+            <article class="card" data-platform="ios" data-name="Japan Live TV">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/7f/ed/b3/7fedb3dc-98f9-d0fe-f3da-7fd2a0504883/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/230x0w.webp" alt="Japan Live TV"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/ios.png" alt="iOS"></span>
+              </div>
+              <div class="content">
+                <h3>Japan Live TV</h3>
+                <a class="btn btn-apple-store" href="https://apps.apple.com/us/app/%E6%97%A5%E6%9C%AC%E3%81%AE%E3%83%86%E3%83%AC%E3%83%93%E6%94%BE%E9%80%81/id6753619478" target="_blank" rel="noopener">App Store</a>
+              </div>
+            </article>
+            <!-- Mexico TV -->
+            <article class="card" data-platform="ios" data-name="Mexico TV En Vivo">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/82/c7/00/82c70092-0485-a500-7005-19c049a7b1c6/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/230x0w.webp" alt="Mexico TV En Vivo"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/ios.png" alt="iOS"></span>
+              </div>
+              <div class="content">
+                <h3>Mexico TV En Vivo</h3>
+                <a class="btn btn-apple-store" href="https://apps.apple.com/us/app/mexico-tv-en-vivo/id6754038061" target="_blank" rel="noopener">App Store</a>
+              </div>
+            </article>
+            <!-- IPTV Pro Max -->
+            <article class="card" data-platform="ios" data-name="IPTV Pro Max">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/5f/1b/10/5f1b101a-ebb5-a42f-d2c1-ed8f01c8fc48/AppIcon-0-0-1x_U007epad-0-1-85-220.jpeg/230x0w.webp" alt="IPTV Pro Max App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/ios.png" alt="iOS"></span>
+              </div>
+              <div class="content">
+                <h3>IPTV Pro Max</h3>
+                <a class="btn btn-apple-store" href="https://apps.apple.com/us/app/iptv-pro-max/id6738427819" target="_blank" rel="noopener">App Store</a>
+              </div>
+            </article>
+            <!-- Ball Invaders -->
+            <article class="card" data-platform="ios" data-name="Ball Invaders: Retro Shooter">
+              <div class="thumb">
+                <img loading="lazy" decoding="async" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/eb/eb/8b/ebeb8bb5-a927-1862-5e94-822e056a366a/AppIcon-0-0-1x_U007ephone-0-0-85-220.png/230x0w.webp" alt="Ball Invaders: Retro Shooter App Icon"/>
+                <span class="plat"><img src="https://juanjomanzana.github.io/ios.png" alt="iOS"></span>
+              </div>
+              <div class="content">
+                <h3>Ball Invaders: Retro Shooter</h3>
+                <a class="btn btn-apple-store" href="https://apps.apple.com/us/app/ball-invaders-retro-shooter/id6504813335" target="_blank" rel="noopener">App Store</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MÁS -->
+    <section id="apps" class="section" aria-labelledby="h-more">
+      <div class="grid">
+        <div class="col-12" style="text-align:center">
+          <h2 id="h-more">Más apps</h2>
+          <p>Descubre más apps en nuestros perfiles de desarrollador:</p>
+          <p>
+            <a class="btn btn-google" href="https://play.google.com/store/apps/developer?id=ML+TV+APPS" target="_blank" rel="noopener">ML TV Apps en Google Play</a>
+            <a class="btn btn-apple" href="https://apps.apple.com/us/developer/santiago-martinez-antequera/id1688175834" target="_blank" rel="noopener">ML TV Apps en App Store</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <small>© <span id="y"></span> ML TV Apps · Todas las marcas pertenecen a sus respectivos propietarios.</small>
+  </footer>
+
   <script>
+    // Año
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Burger
+    const burger = document.querySelector('.burger');
+    const menu = document.getElementById('menu');
+    burger?.addEventListener('click', ()=>{
+      const open = menu.classList.toggle('is-open');
+      burger.setAttribute('aria-expanded', String(open));
+    });
+
+    // Filtro por texto + chips
+    const q = document.getElementById('q');
+    const chips = document.querySelectorAll('.chip');
+    const cards = Array.from(document.querySelectorAll('.card'));
+    let platform = 'all';
+
+    function applyFilters(){
+      const term = (q.value || '').trim().toLowerCase();
+      cards.forEach(card =>{
+        const name = (card.getAttribute('data-name')||'').toLowerCase();
+        const plat = card.getAttribute('data-platform');
+        const matchesText = !term || name.includes(term);
+        const matchesPlat = platform==='all' || plat===platform;
+        card.style.display = (matchesText && matchesPlat) ? '' : 'none';
+      });
+    }
+    q?.addEventListener('input', applyFilters);
+
+    chips.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        chips.forEach(c=>c.setAttribute('aria-pressed','false'));
+        btn.setAttribute('aria-pressed','true');
+        platform = btn.dataset.filter || 'all';
+        applyFilters();
+      });
+    });
+
+    // View Transitions (si el navegador soporta)
+    if (document.startViewTransition){
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', (e)=>{
+          const href=a.getAttribute('href');
+          if(!href) return;
+          e.preventDefault();
+          document.startViewTransition(()=>{
+            location.hash = href;
+          });
+        });
+      });
+    }
+  </script>
+
+  <!-- JSON-LD: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"ML TV Apps",
+    "url":"https://ml-tv-apps.example",
+    "logo":"https://ml-tv-apps.example/icon.svg",
+    "sameAs":[
+      "https://play.google.com/store/apps/developer?id=ML+TV+APPS",
+      "https://apps.apple.com/us/developer/santiago-martinez-antequera/id1688175834"
+    ]
+  }
   </script>
 </body>
 </html>
